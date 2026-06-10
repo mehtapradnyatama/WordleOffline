@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+
+  --color-night-950: #100b1a;
+  --color-night-900: #15101f;
+  --color-night-800: #1d1730;
+  --color-night-700: #271f42;
+  --color-night-600: #352a57;
+
+  --color-gold-400: #ffd16b;
+  --color-gold-500: #ffc857;
+  --color-gold-600: #f0a93a;
+
+  --color-coral-400: #ff7d8f;
+  --color-coral-500: #ff5d73;
+  --color-coral-600: #e8455d;
+
+  --color-mint-400: #57e0a8;
+  --color-mint-500: #2fd396;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    color: #f3eefb;
+    background-color: var(--color-night-900);
+    background-image:
+      radial-gradient(58rem 58rem at 12% -8%, rgba(255, 200, 87, 0.14), transparent 60%),
+      radial-gradient(48rem 48rem at 108% 6%, rgba(255, 93, 115, 0.16), transparent 55%),
+      radial-gradient(60rem 60rem at 50% 116%, rgba(95, 70, 170, 0.22), transparent 60%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* faint paper-grain so flat panels don't look sterile */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .glass {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+  }
+  .no-tap-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
