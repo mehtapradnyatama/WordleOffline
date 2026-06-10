@@ -6,6 +6,15 @@ import DiscussScreen from './screens/DiscussScreen.jsx'
 import ResultScreen from './screens/ResultScreen.jsx'
 import { buildRound } from './lib/game.js'
 
+function shufflePlayers(players) {
+  const a = [...players]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
 export default function App() {
   const [phase, setPhase] = useState('setup') // setup | play | discuss | result
   const [config, setConfig] = useState({
@@ -18,7 +27,8 @@ export default function App() {
 
   const startRound = () => {
     const names = config.names.slice(0, config.playerCount)
-    setRound(buildRound({ names, impostorCount: config.impostorCount, lang: config.lang }))
+    const built = buildRound({ names, impostorCount: config.impostorCount, lang: config.lang })
+    setRound({ ...built, players: shufflePlayers(built.players) })
     setPhase('play')
   }
 
